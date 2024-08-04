@@ -1,0 +1,14 @@
+*{
+    text-transform: uppercase;
+}
+h1{
+    color: red;
+    text-align: center;
+    padding: 700;
+    margin-top: 500;
+}
+p{
+    color: blue;
+    text-align: center;
+    
+}
