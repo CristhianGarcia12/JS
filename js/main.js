@@ -1,5 +1,9 @@
-let nombre= prompt("Ingrese su nombre de usuario :")
-console.log("Hola "+ nombre);
+function saludarAlCliente(nombreUsuario){
+    console.log("Hola "+ nombreUsuario);
+}
+let nombre=prompt("Ingresa tu nombre de usuario: ")
+saludarAlCliente(nombre)
+
 
 
 alert("BIENVENIDO AL BANCO " + nombre)
@@ -11,6 +15,7 @@ for(let i=3; i>=1;i--){
     if(pinGuardado === ingreso){
         alert("Bienvenido, ya podes ingresar");
         ingresar=true;
+        console.log("Ingreso su PIN correctamente");
         break;
     }else{
         alert("Error ingresa nuevamente");
