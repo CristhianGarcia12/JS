@@ -1,14 +1,21 @@
 *{
     text-transform: uppercase;
+    background-color: pink;
 }
 h1{
     color: red;
     text-align: center;
-    padding: 700;
-    margin-top: 500;
+    margin-top: 100px;
+    font-size: 30px;
 }
 p{
     color: blue;
     text-align: center;
-    
+    margin-top: 100px;
+    font-size: 20px;
+}
+h2{
+    text-align: center;
+    margin-top: 100px;
+    font-size: 25px;
 }
