@@ -6,14 +6,14 @@ saludarAlCliente(nombre)
 
 
 
-alert("BIENVENIDO AL BANCO " + nombre)
+alert("Calculadora de ahorros mensual de " + nombre)
 
 let pinGuardado= "1234";
 let ingresar=false
 for(let i=3; i>=1;i--){
     let ingreso=prompt("Ingresa tu PIN");
     if(pinGuardado === ingreso){
-        alert("Bienvenido, ya podes ingresar");
+        alert("Bienvenido " + nombre + ", ya podes calcular tus ahorros :)");
         ingresar=true;
         console.log("Ingreso su PIN correctamente");
         break;
@@ -21,38 +21,45 @@ for(let i=3; i>=1;i--){
         alert("Error ingresa nuevamente");
     }
 }
+
+
+
 console.log(ingresar);
 if(ingresar){
-    let saldo=20000
-    let opcion=prompt("Menu del Banco \n Elegi una opcion: \n1 - Saldo. \n2 - Retiro de dinero. \n3 - Deposito. \n Presina X para finalizar.");
+    function ahorroDelCliente(montoAAhorrar){
+    console.log("Su monto ahorrado es: " + montoAAhorrar);
+}
+let monto=prompt("Tu monto a ahorrar es de: ")
+ahorroDelCliente(monto);
+    let opcion=prompt("Elegi una opcion: \n1 - Objetivo a lograr. \n2 - Dinero gastado. \n3 - Ingreso de dinero. \n Presiona X para finalizar.");
     while(opcion!= "x" || "X"){
         if(opcion=="1"){
-            alert("Tu saldo es: " + saldo);
+            alert("Tu objetivo a lograr es de: " + monto);
         }else if(opcion=="2"){
-            let retiro=prompt("Ingresa el monto a retirar")
-            if(retiro>saldo){
-                alert("Saldo insuficiente");
+            let retiro=prompt("Ingresa el dinero gastado este mes: ")
+            if(retiro>monto){
+                alert("Cuidado! Te estas alejando de tu objetivo");
             }else{
-                saldo=saldo- +retiro;
-                alert("Tu saldo es de: " + saldo);
+                monto=monto- +retiro;
+                alert("Tu monto actual es de: " + monto);
             }
         }else if(opcion=="3"){
-            let deposito=prompt("Ingresa el monto a depositar");
-            saldo=saldo + +deposito;
-            alert("Tu saldo es de: " + saldo);
+            let deposito=prompt("Ingresa el dinero ahorrado este mes: ");
+            monto=monto + +deposito;
+            alert("Tu monto actual es de: " + monto);
         }else if(opcion=="x"){
             console.log("El usuario decidio finalizar");
-            alert("Que tenga un Buen dia");
+            alert("Hasta el proximo mes, " + nombre);
             break;
         }else if(opcion=="X"){
             console.log("El usuario decidio finalizar");
-            alert("Que tenga un Buen dia");
+            alert("Hasta el proximo mes, " + nombre);
             break;
         }else{
             alert("Opcion no valida");
         }
-        opcion=prompt("Menu del Banco \n Elegi una opcion: \n1 - Saldo. \n2 - Retiro de dinero. \n3 - Deposito. \n Presina X para finalizar.");
+        opcion=prompt("Elegi una opcion: \n1 - Objetivo a lograr. \n2 - Dinero gastado. \n3 - Ingreso de dinero. \n Presiona X para finalizar.");
     }
     } else {
-    alert("Se te acabaron los intentos, te retuvimos la tarjeta");
+    alert("Se te acabaron los intentos, no sos " + nombre);
     }
