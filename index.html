@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="icon" href="./imagenes/calculadora.png">
+    <title>CALCULADORA DE AHORROS</title>
+</head>
+<body>
+    <div class="inicio">
+        <h1>Calculadora de ahorros</h1>
+        <p>Bienvenido usuario a su calculadora de ahorros</p>
+    </div>
+    <div id="formularioContainer">
+    <h2>Crea tu usuario</h2>
+    <form id="contactoForm">
+        <div class="form-grupo">
+            <label for="name">Usuario:</label>
+            <input type="text" id="usuario" name="nombre" required>
+        </div>
+        <div class="formGrupo">
+            <label for="name">Contraseña:</label>
+            <input type="password" id="contraseña" name="contraseña" required>
+        </div>
+        <div class="check">
+            <label for="check">Recordar</label>
+            <input type="checkbox" id="check" name="check" />
+            <!-- <p id="message"></p> -->
+        </div>
+        <button type="submit">Ingresar</button>
+        <p id="mensajeSi"><!--aparece un mensaje si..--></p>
+    </form>
+    </div>
+    <h4>Ingresa tus objetivos.</h4>
+    <div>
+        <label for="ingreso">Agregar nombre del objetivo</label>
+        <input type="text" name="ingreso" id="nombreObjetivo" placeholder="Agrega tu objetivo" autofocus />
+        <label for="ingreso">Agregar precio del objetivo</label>
+        <input type="number" name="ingreso" id="precioObjetivo" placeholder="Agrega el precio de tu objetivo ($)" autofocus />
+        <label for="ingreso">Agregar descripcion del objetivo</label>
+        <input type="text" name="ingreso" id="descripcionObjetivo" placeholder="Agrega una descripcion sobre tu objetivo" autofocus /><br>
+    </div>
+    
+    <button id="btnSearch" class="btn btn-search">Agregar</button>
+    
+    <div id="contenedor" class="contenedor">
+    <!-- contenido de objetivos -->
+    </div>
+    <!-- Boton -->
+    <div class="btn-container">
+    <button class="btn btn-success" id="mostrarCarritoBtn">Mostrar objetivos</button>
+    </div>
+    </div>
+    <div class="calculadoraContainer" id="calculator">
+        <form id="calculadora">
+            <label for="montoInicial">Monto inicial:</label>
+            <input type="number" id="montoInicial" required>
+
+            <label for="montoAhorrado">Monto ahorrado este mes:</label>
+            <input type="number" id="montoAhorrado" required>
+            
+            <label for="gastoMensual">Gasto mensual:</label>
+            <input type="number" id="gastoMensual">
+            <button type="button" onclick="calculator()">Calcular</button>
+
+            <div id="result">
+                <h2>Ahorro mensual:</h2>
+                <p id="calcular">$0.00</p>
+                <p id="mensajeDeRespuesta"><!--mensaje si... --></p>
+                <p id="mensajeDeMontoNegativo"></p>
+            </div>
+        </form>
+    </div>
+    <script src="./js/main.js"></script>
+</body>
+</html>
