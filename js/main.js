@@ -27,16 +27,36 @@ if(checkbox.checked){
 
 if (usuario && contraseña) {
     
-    responseMessage.textContent = '¡Bienvenido ' + usuario + " ya podes empezar a calcular tus";
     responseMessage.style.color = "red";
-    
+    Swal.fire({
+        title: "Bienvenido " + usuario + ", ya podes realizar tus Calculos",
+        //text: "That thing is still around?",
+        icon: "success"
+    });
+    // Toastify({
+    //     text: "Bienvenido " + usuario + ", ya podes ingresar a tu Calculadora de Ahorros",
+    //     duration: 4000,
+    //     destination: "https://github.com/apvarun/toastify-js",
+    //     newWindow: true,
+    //     close: true,
+    //     gravity: "top", // `top` or `bottom`
+    //     position: "right", // `left`, `center` or `right`
+    //     stopOnFocus: true, // Prevents dismissing of toast on hover
+    //     style: {
+    //     background: "linear-gradient(to right, purple, pink)",
+    //     },
+    //     onClick: function(){} // Callback after click
+    // }).showToast();
 } else {
-    responseMessage.textContent = 'Por favor, completa todos los campos.';
+    
     responseMessage.style.color = "red";
+    Swal.fire({
+        title: "No completaste todas las casillas",
+        text: "Verifique de completar todas las casillas correspondientes",
+        icon: "warning"
+    });
 }
 });
-
-
 
 const inputNombreObjetivo=document.querySelector("#nombreObjetivo"),
 inputPrecioObjetivo=document.querySelector("#precioObjetivo"),
@@ -50,8 +70,21 @@ function Objetivo(nombre, precio, descripcion){
     this.nombre= nombre;
     this.precio= parseFloat(precio);
     this.descripcion=descripcion;
+    Toastify({
+        text: "INGRESASTE TU NUEVO OBJETIVO, " + nombre + ", " + descripcion + "\n !SUERTE¡",
+        duration: 4000,
+        destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+        background: "linear-gradient(to right, purple, pink)",
+        },
+        onClick: function(){} // Callback after click
+    }).showToast();
 }
-
 function crearHtml(arr){
     let html;
     for (const objetivo of arr) {
