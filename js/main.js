@@ -1,62 +1,70 @@
 document.getElementById("formularioContainer").addEventListener("submit", function(event) {
     event.preventDefault();
 
+    const usuario = document.getElementById("usuario").value;
+    const contraseña = document.getElementById("contraseña").value;
+    const checkbox = document.getElementById("check");
+    const responseMessage = document.getElementById("mensajeSi");
 
-const usuario=document.getElementById("usuario").value;
-const contraseña=document.getElementById("contraseña").value;
-const checkbox=document.getElementById("check");
-const responseMessage=document.getElementById("mensajeSi");
-
-
-function guardarUsuario(storage){
-    if(storage=="local"){
-        localStorage.setItem("usuario",JSON.stringify(usuario))
-        localStorage.setItem("contraseña",JSON.stringify(contraseña))
-    };
-    if(storage=="session"){
-        sessionStorage.setItem("usuario",JSON.stringify(usuario))
-        sessionStorage.setItem("contraseña",JSON.stringify(contraseña))
+    function guardarUsuario(storage) {
+        if (storage == "local") {
+            localStorage.setItem("usuario", JSON.stringify(usuario));
+            localStorage.setItem("contraseña", JSON.stringify(contraseña));
+        } else if (storage == "session") {
+            sessionStorage.setItem("usuario", JSON.stringify(usuario));
+            sessionStorage.setItem("contraseña", JSON.stringify(contraseña));
+        }
     }
-}
 
-if(checkbox.checked){
-    guardarUsuario("local")
-}else{
-    guardarUsuario("session")
-}
+    if (checkbox.checked) {
+        guardarUsuario("local");
+    } else {
+        guardarUsuario("session");
+    }
 
-if (usuario && contraseña) {
     
-    responseMessage.style.color = "red";
-    Swal.fire({
-        title: "Bienvenido " + usuario + ", ya podes realizar tus Calculos",
-        //text: "That thing is still around?",
-        icon: "success"
-    });
-    // Toastify({
-    //     text: "Bienvenido " + usuario + ", ya podes ingresar a tu Calculadora de Ahorros",
-    //     duration: 4000,
-    //     destination: "https://github.com/apvarun/toastify-js",
-    //     newWindow: true,
-    //     close: true,
-    //     gravity: "top", // `top` or `bottom`
-    //     position: "right", // `left`, `center` or `right`
-    //     stopOnFocus: true, // Prevents dismissing of toast on hover
-    //     style: {
-    //     background: "linear-gradient(to right, purple, pink)",
-    //     },
-    //     onClick: function(){} // Callback after click
-    // }).showToast();
-} else {
-    
-    responseMessage.style.color = "red";
-    Swal.fire({
-        title: "No completaste todas las casillas",
-        text: "Verifique de completar todas las casillas correspondientes",
-        icon: "warning"
-    });
-}
+    if (usuario && contraseña) {
+        autenticarUsuario(usuario, contraseña)
+            .then(data => {
+                responseMessage.textContent = error;
+                responseMessage.style.color = "red"
+            })
+            .catch(error => {
+                responseMessage.textContent = '¡Bienvenido ' + usuario + "! Ya puedes empezar a calcular tus objetivos.";;
+                responseMessage.style.color = "green";;
+            });
+    } else {
+        responseMessage.textContent = 'Por favor, completa todos los campos.';
+        responseMessage.style.color =  "red";
+    }
 });
+
+// Función para autenticar el usuario
+function autenticarUsuario(usuario, contraseña) {
+    return new Promise((resolve, reject) => {
+        const url = 'https://swapi.dev/api/people/${inputSearch.value}'; //URL local
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ usuario, contraseña })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Ingresaste de manera incorrecta');
+            }
+            return response.json();
+        })
+        .then(data => {
+            resolve(data);
+        })
+        .catch(error => {
+            reject(error);
+        });
+    });
+}
 
 const inputNombreObjetivo=document.querySelector("#nombreObjetivo"),
 inputPrecioObjetivo=document.querySelector("#precioObjetivo"),
@@ -70,21 +78,8 @@ function Objetivo(nombre, precio, descripcion){
     this.nombre= nombre;
     this.precio= parseFloat(precio);
     this.descripcion=descripcion;
-    Toastify({
-        text: "INGRESASTE TU NUEVO OBJETIVO, " + nombre + ", " + descripcion + "\n !SUERTE¡",
-        duration: 4000,
-        destination: "https://github.com/apvarun/toastify-js",
-        newWindow: true,
-        close: true,
-        gravity: "top", // `top` or `bottom`
-        position: "right", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
-        style: {
-        background: "linear-gradient(to right, purple, pink)",
-        },
-        onClick: function(){} // Callback after click
-    }).showToast();
 }
+
 function crearHtml(arr){
     let html;
     for (const objetivo of arr) {
@@ -132,6 +127,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+
+
+
 function calculator() {
     const montoInicial = parseFloat(document.getElementById('montoInicial').value);
     const montoAhorrado = parseFloat(document.getElementById('montoAhorrado').value);
@@ -160,7 +158,5 @@ function calculator() {
     mensajeDeMontoNegativo.textContent="Excelente mes, siga asi!";
 }
 }
-
-
 
 //localStorage.clear()
